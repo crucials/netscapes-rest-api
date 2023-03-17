@@ -1,0 +1,1 @@
+{"version":3,"file":"status-code-error.js","sourceRoot":"","sources":["../../errors/status-code-error.ts"],"names":[],"mappings":"AAAA,MAAM,CAAC,OAAO,OAAO,eAAe;IAKhC,YAAY,OAAgB,EAAE,UAAmB;QAJxC,SAAI,GAAW,iBAAiB,CAAA;QAKrC,IAAI,CAAC,OAAO,GAAG,OAAO;YACtB,IAAI,CAAC,UAAU,GAAG,UAAU,CAAA;IAChC,CAAC;CACJ"}
