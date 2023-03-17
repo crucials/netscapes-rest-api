@@ -3,10 +3,10 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import prismaClient from './prisma-client.js'
 
-import auth from './routes/auth.js'
-import pictures from './routes/pictures.js'
-import collections from './routes/collections.js'
-import accounts from './routes/accounts.js'
+import auth from './api/auth.js'
+import pictures from './api/pictures.js'
+import collections from './api/collections.js'
+import accounts from './api/accounts.js'
 
 
 dotenv.config()
