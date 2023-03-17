@@ -1,11 +1,13 @@
 import express from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
-import authRouter from './router/auth-router.js'
-import picturesRouter from './router/pictures-router.js'
-import collectionsRouter from './router/collections-router.js'
-import accountsRouter from './router/accounts-router.js'
 import prismaClient from './prisma-client.js'
+
+import auth from './routes/auth.js'
+import pictures from './routes/pictures.js'
+import collections from './routes/collections.js'
+import accounts from './routes/accounts.js'
+
 
 dotenv.config()
 
@@ -14,10 +16,10 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-app.use('/auth', authRouter)
-app.use('/pictures', picturesRouter)
-app.use('/collections', collectionsRouter)
-app.use('/accounts', accountsRouter)
+app.use('/auth', auth)
+app.use('/pictures', pictures)
+app.use('/collections', collections)
+app.use('/accounts', accounts)
 
 app.listen(5000, () => {
     console.log('Server started')
