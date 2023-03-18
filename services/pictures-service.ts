@@ -25,7 +25,8 @@ class PicturesService {
                     tags: {
                         hasSome: lastViewedTags
                     }
-                }
+                },
+                include: { author: true }
             })
 
             const remainingPictures = await prismaClient.picture.findMany({
@@ -35,7 +36,8 @@ class PicturesService {
                             hasSome: lastViewedTags
                         }
                     }
-                }
+                },
+                include: { author: true }
             })
 
             return shuffle(recommendedPictures).concat(shuffle(remainingPictures))
@@ -49,7 +51,7 @@ class PicturesService {
     async getPicture(id : number, accountId? : number) : Promise<Picture> {
         const foundPicture = await prismaClient.picture.findFirst({
             where: { id },
-            include: { comments: true }
+            include: { comments: true, author: true }
         })
         
         if(!foundPicture) {
@@ -97,7 +99,7 @@ class PicturesService {
 
 
     async getShuffledPictures() {
-        return shuffle(await prismaClient.picture.findMany())
+        return shuffle(await prismaClient.picture.findMany({ include: { author: true } }))
     }
 
 
