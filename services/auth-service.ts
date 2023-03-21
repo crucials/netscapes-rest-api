@@ -39,7 +39,12 @@ class AuthService {
         await prismaClient.account.create({
             data: {
                 username,
-                password: hashedPassword
+                password: hashedPassword,
+                collections: {
+                    create: {
+                        name: 'Saved pictures'
+                    }
+                }
             }
         })
     }
