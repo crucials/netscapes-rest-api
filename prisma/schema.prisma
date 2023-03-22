@@ -19,6 +19,7 @@ model Account {
 
   publishedPictures Picture[]
   collections Collection[]
+  comments Comment[]
 }
 
 model Collection {
@@ -49,9 +50,11 @@ model Picture {
 model Comment {
   id Int @id @default(autoincrement())
   text String
-  authorUsername String
   creationDate DateTime @default(now())
 
   targetPicture Picture @relation(fields: [ targetPictureId ], references: [ id ])
   targetPictureId Int
+
+  authorAccount Account @relation(fields: [ authorAccountId ], references: [ id ])
+  authorAccountId Int
 }
