@@ -23,7 +23,5 @@ app.use('/accounts', accountsRouter)
 
 app.listen(5000, () => {
     console.log('Server started')
-    prismaClient.account.findMany().then(accounts => {
-        console.log(accounts)
-    })
+    prismaClient.comment.deleteMany()
 })
