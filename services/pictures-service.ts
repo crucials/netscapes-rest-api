@@ -137,8 +137,8 @@ class PicturesService {
         return foundPicture.comments
     }
 
-
-    async addComment(pictureId : number, comment : Comment, accountId : number) {
+    
+    async addComment(pictureId : number, commentText : string, accountId : number) {
         const foundPicture = await prismaClient.picture.findFirst({
             where: { id: pictureId },
             include: {
@@ -154,12 +154,20 @@ class PicturesService {
             throw new StatusCodeError(`Account with id '${accountId}' not found`, 404)
         }
 
-        comment.authorUsername = foundUser.username
 
         await prismaClient.picture.update({
             where: { id: foundPicture.id },
             data: {
-                comments: { create: comment }
+                comments: { 
+                    create: {
+                        text: commentText,
+                        authorAccount: {
+                            connect: {
+                                id: foundUser.id
+                            }
+                        }
+                    }
+                }
             }
         })
     }

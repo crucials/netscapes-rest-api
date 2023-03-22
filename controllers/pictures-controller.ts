@@ -95,7 +95,7 @@ class PicturesController {
         }
 
         try {
-            await picturesService.addComment(+request.params.id, request.body, +accountId)
+            await picturesService.addComment(+request.params.id, request.body.text, +accountId)
             response.send('Created comment successfully')
         }
         catch(error) {
