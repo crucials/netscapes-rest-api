@@ -21,6 +21,6 @@ app.use('/pictures', picturesRouter)
 app.use('/collections', collectionsRouter)
 app.use('/accounts', accountsRouter)
 
-app.listen(5000, async () => {
+app.listen(5000, () => {
     console.log('Server started')
 })
