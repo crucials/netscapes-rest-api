@@ -21,7 +21,7 @@ app.use('/pictures', picturesRouter)
 app.use('/collections', collectionsRouter)
 app.use('/accounts', accountsRouter)
 
-app.listen(5000, () => {
+app.listen(5000, async () => {
     console.log('Server started')
     await prismaClient.comment.deleteMany()
 })
