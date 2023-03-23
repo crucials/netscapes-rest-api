@@ -11,9 +11,7 @@ class AccountsController {
         }
 
         try {
-            // Omitting password property from account object with destructuring syntax
-            const { password, ...accountDTO } = await accountsService.getAccountById(+accountId)
-            response.json(accountDTO)
+            response.json(await accountsService.getAccountById(+accountId))
         } 
         catch (error) {
             if(error instanceof StatusCodeError) {

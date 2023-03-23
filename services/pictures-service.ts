@@ -1,16 +1,9 @@
 import { Comment, Picture } from '@prisma/client'
 import StatusCodeError from '../errors/status-code-error.js'
 import prismaClient from '../prisma-client.js'
-import { shuffle } from '../utils.js'
+import { excludePassword, shuffle } from '../utils.js'
 
 class PicturesService {
-    private readonly excludePassword = {
-        select: {
-            avatarUrl: true, lastViewedTags: true, username: true, id: true
-        }
-    }
-
-
     async addPicture(picture : Picture, authorId : number) {
         await prismaClient.picture.create({
             data: {
@@ -33,7 +26,7 @@ class PicturesService {
                         hasSome: lastViewedTags
                     }
                 },
-                include: { author: this.excludePassword }
+                include: { author: excludePassword }
             })
 
             const remainingPictures = await prismaClient.picture.findMany({
@@ -44,7 +37,7 @@ class PicturesService {
                         }
                     }
                 },
-                include: { author: this.excludePassword }
+                include: { author: excludePassword }
             })
 
             return shuffle(recommendedPictures).concat(shuffle(remainingPictures))
@@ -61,10 +54,10 @@ class PicturesService {
             include: { 
                 comments: { 
                     include: { 
-                        authorAccount: this.excludePassword
+                        authorAccount: excludePassword
                     } 
                 },
-                author: this.excludePassword
+                author: excludePassword
             }
         })
         
@@ -113,7 +106,7 @@ class PicturesService {
 
 
     async getShuffledPictures() {
-        return shuffle(await prismaClient.picture.findMany({ include: { author: this.excludePassword } }))
+        return shuffle(await prismaClient.picture.findMany({ include: { author: excludePassword } }))
     }
 
 

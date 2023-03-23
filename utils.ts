@@ -9,3 +9,9 @@ export function shuffle(array : any[]) {
 
     return clonedArray
 }
+
+export const excludePassword = {
+    select: {
+        avatarUrl: true, lastViewedTags: true, username: true, id: true
+    }
+}

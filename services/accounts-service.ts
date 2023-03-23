@@ -1,14 +1,16 @@
 import StatusCodeError from '../errors/status-code-error.js'
 import prismaClient from '../prisma-client.js'
+import { excludePassword } from '../utils.js'
 
 class AccountsService {
 
     async getAccountById(id : number) {
         const foundAccount = await prismaClient.account.findFirst({
             where: { id },
-            include: {
-                collections: true,
-                publishedPictures: true
+            select: {
+                ...excludePassword,
+                publishedPictures: true,
+                collections: true
             }
         })
 
