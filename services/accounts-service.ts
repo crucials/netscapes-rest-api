@@ -8,7 +8,7 @@ class AccountsService {
         const foundAccount = await prismaClient.account.findFirst({
             where: { id },
             select: {
-                ...excludePassword,
+                ...excludePassword.select,
                 publishedPictures: true,
                 collections: true
             }
