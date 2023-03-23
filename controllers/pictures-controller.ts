@@ -1,3 +1,4 @@
+import { Picture } from '@prisma/client'
 import { Request, Response } from 'express'
 import StatusCodeError from '../errors/status-code-error.js'
 import picturesService from '../services/pictures-service.js'
@@ -73,21 +74,6 @@ class PicturesController {
     }
 
 
-    async getPictureComments(request : Request, response : Response) {
-        try {
-            response.json(await picturesService.getComments(+request.params.id))
-        }
-        catch(error) {
-            if(error instanceof StatusCodeError) {
-                response.status(error.statusCode).send(error.message)
-            }
-            else {
-                response.status(500).send('Failed to get picture comments')
-            }
-        }
-    }
-
-
     async createComment(request : Request, response : Response) {
         const accountId = request.headers['account-id']
         if(!accountId) {
@@ -108,6 +94,11 @@ class PicturesController {
         }
     }
 
+
+
+    private omitPasswords(picture : Picture) {
+
+    }
 }
 
 export default new PicturesController()

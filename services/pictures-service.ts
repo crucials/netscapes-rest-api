@@ -52,7 +52,11 @@ class PicturesService {
         const foundPicture = await prismaClient.picture.findFirst({
             where: { id },
             include: { 
-                comments: { include: { authorAccount: true } },
+                comments: { 
+                    include: { 
+                        authorAccount: true
+                    } 
+                },
                 author: true 
             }
         })
@@ -122,24 +126,6 @@ class PicturesService {
         await prismaClient.picture.delete({
             where: { id: pictureToDelete.id }
         })
-    }
-
-
-    async getComments(pictureId : number) {
-        const foundPicture = await prismaClient.picture.findFirst({
-            where: { id: pictureId },
-            include: {
-                comments: {
-                    include: { authorAccount: true }
-                }
-            }
-        })
-
-        if(!foundPicture) {
-            throw new StatusCodeError(`Picture with id '${pictureId}' not found`, 404)
-        }
-
-        return foundPicture.comments
     }
 
     

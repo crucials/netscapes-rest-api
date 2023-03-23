@@ -9,7 +9,6 @@ router.delete('/:id', createAuthMiddleware(), picturesController.deletePicture)
 router.get('/', createAuthMiddleware(false), picturesController.getPicturesFeed)
 
 router.get('/:id', createAuthMiddleware(false), picturesController.getPicture)
-router.get('/:id/comments', picturesController.getPictureComments)
 router.post('/:id/comments', createAuthMiddleware(), picturesController.createComment)
 
 export default router
