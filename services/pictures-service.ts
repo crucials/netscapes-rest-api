@@ -6,7 +6,7 @@ import { shuffle } from '../utils.js'
 class PicturesService {
     private readonly excludePassword = {
         select: {
-            avatarUrl: true, lastViewedTags: true, username: true
+            avatarUrl: true, lastViewedTags: true, username: true, id: true
         }
     }
 
