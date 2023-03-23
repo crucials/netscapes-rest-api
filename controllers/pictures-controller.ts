@@ -45,7 +45,6 @@ class PicturesController {
             }
             catch(error) {
                 response.status(500).send('Something went wrong while searching pictures')
-                console.log(error)
             }
         }
         else {

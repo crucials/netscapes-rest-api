@@ -114,12 +114,16 @@ class PicturesService {
         return await prismaClient.picture.findMany({
             include: { author: excludePassword },
             where: {
-                OR: {
-                    title: { contains: query },
-                    description: { contains: query },
-                    author: { username: { contains: query } },
-                    tags: { has: query }
-                }
+                OR: [
+                    { title: { contains: query, mode: 'insensitive' } },
+                    { description: { contains: query, mode: 'insensitive' } },
+                    { 
+                        author: { 
+                            username: { contains: query, mode: 'insensitive' } 
+                        } 
+                    },
+                    { tags: { has: query } },
+                ]
             }
         })
     }
