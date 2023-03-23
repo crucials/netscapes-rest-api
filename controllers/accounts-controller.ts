@@ -20,6 +20,8 @@ class AccountsController {
             else {
                 response.status(500).send('Failed to get current account info')
             }
+
+            console.log(error)
         }
     }
 
