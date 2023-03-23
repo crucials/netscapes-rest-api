@@ -51,7 +51,10 @@ class PicturesService {
     async getPicture(id : number, accountId? : number) : Promise<Picture> {
         const foundPicture = await prismaClient.picture.findFirst({
             where: { id },
-            include: { comments: true, author: true }
+            include: { 
+                comments: { include: { authorAccount: true } },
+                author: true 
+            }
         })
         
         if(!foundPicture) {
