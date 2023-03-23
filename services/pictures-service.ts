@@ -126,7 +126,9 @@ class PicturesService {
         const foundPicture = await prismaClient.picture.findFirst({
             where: { id: pictureId },
             include: {
-                comments: true
+                comments: {
+                    include: { authorAccount: true }
+                }
             }
         })
 
