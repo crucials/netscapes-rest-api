@@ -38,10 +38,11 @@ class PicturesController {
 
     async searchPictures(request : Request, response : Response) {
         const query = request.query.query
+        console.log(query)
 
         if(query) {
             try {
-                response.json(await picturesService.searchPictures(query.toString()))
+                await response.json(await picturesService.searchPictures(query.toString()))
             }
             catch(error) {
                 response.status(500).send('Something went wrong while searching pictures')
