@@ -4,6 +4,13 @@ import prismaClient from '../prisma-client.js'
 import { shuffle } from '../utils.js'
 
 class PicturesService {
+    private readonly excludePassword = {
+        select: {
+            avatarUrl: true, lastViewedTags: true, username: true
+        }
+    }
+
+
     async addPicture(picture : Picture, authorId : number) {
         await prismaClient.picture.create({
             data: {
@@ -26,7 +33,7 @@ class PicturesService {
                         hasSome: lastViewedTags
                     }
                 },
-                include: { author: true }
+                include: { author: this.excludePassword }
             })
 
             const remainingPictures = await prismaClient.picture.findMany({
@@ -37,7 +44,7 @@ class PicturesService {
                         }
                     }
                 },
-                include: { author: true }
+                include: { author: this.excludePassword }
             })
 
             return shuffle(recommendedPictures).concat(shuffle(remainingPictures))
@@ -54,10 +61,10 @@ class PicturesService {
             include: { 
                 comments: { 
                     include: { 
-                        authorAccount: true
+                        authorAccount: this.excludePassword
                     } 
                 },
-                author: true 
+                author: this.excludePassword
             }
         })
         
@@ -106,7 +113,7 @@ class PicturesService {
 
 
     async getShuffledPictures() {
-        return shuffle(await prismaClient.picture.findMany({ include: { author: true } }))
+        return shuffle(await prismaClient.picture.findMany({ include: { author: this.excludePassword } }))
     }
 
 
