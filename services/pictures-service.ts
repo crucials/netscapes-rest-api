@@ -110,6 +110,21 @@ class PicturesService {
     }
 
 
+    async searchPictures(query : string) {
+        return await prismaClient.picture.findMany({
+            include: { author: excludePassword },
+            where: {
+                OR: {
+                    title: { contains: query },
+                    description: { contains: query },
+                    author: { username: { contains: query } },
+                    tags: { has: query }
+                }
+            }
+        })
+    }
+
+
     async deletePicture(pictureId : number, accountId : number) {    
         const pictureToDelete = await prismaClient.picture.findFirst({
             where: { id: pictureId }
