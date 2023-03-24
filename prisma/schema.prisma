@@ -52,7 +52,7 @@ model Comment {
   text String
   creationDate DateTime @default(now())
 
-  targetPicture Picture @relation(fields: [ targetPictureId ], references: [ id ])
+  targetPicture Picture @relation(fields: [ targetPictureId ], references: [ id ], onDelete: Cascade)
   targetPictureId Int
 
   authorAccount Account @relation(fields: [ authorAccountId ], references: [ id ])
