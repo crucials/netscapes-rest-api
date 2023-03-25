@@ -41,18 +41,6 @@ class CollectionsController {
     }
 
 
-    async getCollectionsOfAccount(request : Request, response : Response) {
-        const accountId = +request.params.accountId
-
-        try {
-            response.json(await collectionsService.getCollectionOfAccount(accountId))
-        } 
-        catch (error) {
-            response.status(500).send('Failed to get collections')
-        }
-    }
-
-
     async getCollectionById(request : Request, response : Response) {
         try {
             response.json(await collectionsService.getCollectionById(+request.params.id))

@@ -32,18 +32,6 @@ class CollectionsService {
             where: { id: collectionToDelete.id }
         })
     }
-
-
-    async getCollectionOfAccount(accountId : number) {
-        return await prismaClient.collection.findMany({
-            where: {
-                author: {
-                    id: accountId
-                }
-            },
-            include: { savedPictures: true }
-        })
-    }
     
 
     async getCollectionById(id : number) {
