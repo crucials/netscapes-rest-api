@@ -5,12 +5,14 @@ import { excludePassword, shuffle } from '../utils.js'
 
 class PicturesService {
     async addPicture(picture : Picture, authorId : number) {
-        await prismaClient.picture.create({
+        const { id } = await prismaClient.picture.create({
             data: {
                 ...picture,
                 authorId
             },
         })
+
+        return id
     }
 
 

@@ -11,8 +11,8 @@ class PicturesController {
         }
 
         try {
-            await picturesService.addPicture(request.body, +accountId)
-            response.send('Created new picture successfully')
+            const createdPictureId = await picturesService.addPicture(request.body, +accountId)
+            response.json({ id: createdPictureId })
         }
         catch(error) {
             response.status(500).send('Failed to create new picture')
