@@ -44,6 +44,23 @@ class AccountsController {
         }
     }
 
+
+    async getAccount(request : Request, response : Response) {
+        const accountId = +request.params.id
+
+        try {
+            response.json(await accountsService.getAccountById(accountId))
+        }
+        catch(error) {
+            if(error instanceof StatusCodeError) {
+                response.status(error.statusCode).send(error.message)
+            }
+            else {
+                response.status(500).send('Failed to get account info')
+            }
+        }
+    }
+
 }
 
 export default new AccountsController()
