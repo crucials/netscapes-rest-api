@@ -21,6 +21,7 @@ class PicturesController {
 
 
     async getPicturesFeed(request : Request, response : Response) {
+        console.log('Requesting pictures')
         const accountId = request.headers['account-id']
         
         try {
