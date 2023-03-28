@@ -42,7 +42,7 @@ class AuthService {
                 password: hashedPassword,
                 collections: {
                     create: {
-                        name: 'Saved pictures'
+                        name: 'Saved by ' + username
                     }
                 }
             }
